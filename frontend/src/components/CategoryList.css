@@ -1,0 +1,40 @@
+.category-container {
+  display: flex;
+  gap: 20px;
+  padding: 20px;
+  overflow-x: auto;
+}
+
+/* Card */
+.category-card {
+  text-align: center;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+/* Image */
+.category-card img {
+  width: 90px;
+  height: 90px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 3px solid #ec4899;
+  padding: 3px;
+  background: white;
+}
+
+/* Hover effect */
+.category-card:hover {
+  transform: scale(1.1);
+}
+
+/* Active category (selected) */
+.category-card.active img {
+  border: 4px solid #be185d;
+  transform: scale(1.1);
+}
+
+.category-card p {
+  margin-top: 8px;
+  font-weight: 500;
+}

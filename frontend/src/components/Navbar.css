@@ -1,0 +1,47 @@
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #ec4899;
+  padding: 10px 20px;
+  color: white;
+  height:100px;
+}
+
+/* Logo */
+.logo {
+  font-size: 22px;
+  font-weight: bold;
+}
+
+/* Search */
+.search {
+  display: flex;
+  width: 30%;
+}
+
+.search input {
+  flex: 1;
+  padding: 6px;
+  border: none;
+  outline: none;
+}
+
+.search button {
+  padding: 6px 12px;
+  border: none;
+  background-color: #be185d;
+  color: white;
+  cursor: pointer;
+}
+
+/* Menu */
+.menu {
+  display: flex;
+  gap: 20px;
+  align-items: center;
+}
+
+.menu span {
+  cursor: pointer;
+}
