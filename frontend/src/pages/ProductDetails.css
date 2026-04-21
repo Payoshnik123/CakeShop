@@ -1,0 +1,33 @@
+.details-container {
+  display: flex;
+  gap: 40px;
+  padding: 40px;
+}
+
+.details-container img {
+  width: 400px;
+  height: 400px;
+  object-fit: cover;
+  border-radius: 10px;
+}
+
+.details-info {
+  max-width: 400px;
+}
+
+.details-info h2 {
+  margin-bottom: 10px;
+}
+
+.details-info p {
+  margin-bottom: 10px;
+}
+
+.details-info button {
+  padding: 10px 20px;
+  background: #ec4899;
+  color: white;
+  border: none;
+  cursor: pointer;
+  border-radius: 6px;
+}

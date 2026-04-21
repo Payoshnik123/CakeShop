@@ -1,12 +1,19 @@
 import React from "react";
 import "./Navbar.css";
+import { useNavigate } from "react-router-dom";
 
-const Navbar = ({ cartCount, setSearch }) => {
+const Navbar = ({ cartCount, wishlistCount, setSearch }) => {
+  const navigate = useNavigate();
+
   return (
     <nav className="navbar">
 
-      <div className="logo">🎂 CakeShop</div>
+      {/* Logo */}
+      <div className="logo" onClick={() => navigate("/")}>
+        🎂 CakeKing
+      </div>
 
+      {/* Search */}
       <div className="search">
         <input
           type="text"
@@ -15,11 +22,20 @@ const Navbar = ({ cartCount, setSearch }) => {
         />
       </div>
 
+      {/* Menu */}
       <div className="menu">
-        <span>🏠 Home</span>
+        <span onClick={() => navigate("/")}>🏠 Home</span>
+
         <span>Payment</span>
-        <span>🛒 Cart ({cartCount})</span>
-        <span>❤️ Shortlist</span>
+
+        <span onClick={() => navigate("/cart")}>
+          🛒 Cart ({cartCount})
+        </span>
+
+        <span onClick={() => navigate("/wishlist")}>
+          ❤️ Shortlist ({wishlistCount})
+        </span>
+
         <span>👤</span>
       </div>
 

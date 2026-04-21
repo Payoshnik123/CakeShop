@@ -1,0 +1,80 @@
+.cart-container {
+  padding: 20px;
+}
+
+.cart-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  border: 1px solid #ddd;
+  padding: 10px;
+  margin-bottom: 10px;
+  border-radius: 10px;
+}
+
+.cart-item img {
+  width: 80px;
+  height: 80px;
+  object-fit: cover;
+  border-radius: 10px;
+}
+
+.cart-item button {
+  background: red;
+  color: white;
+  border: none;
+  padding: 6px 10px;
+  cursor: pointer;
+}
+.cart-container {
+  padding: 20px;
+}
+
+/* Item layout */
+.cart-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  border: 1px solid #ddd;
+  padding: 12px;
+  margin-bottom: 12px;
+  border-radius: 10px;
+  background: #fff;
+}
+
+/* Left section */
+.cart-left {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+.cart-left img {
+  width: 80px;
+  height: 80px;
+  object-fit: cover;
+  border-radius: 10px;
+}
+
+/* Remove button */
+.cart-item button {
+  background: red;
+  color: white;
+  border: none;
+  padding: 6px 10px;
+  cursor: pointer;
+  border-radius: 5px;
+}
+
+/* Payment button */
+.pay-btn {
+  margin-top: 20px;
+  padding: 10px 20px;
+  background: #ec4899;
+  color: white;
+  border: none;
+  cursor: pointer;
+  border-radius: 6px;
+}

@@ -1,0 +1,60 @@
+.wishlist-container {
+  padding: 30px;
+}
+
+/* Title */
+.wishlist-container h2 {
+  margin-bottom: 20px;
+}
+
+/* Each item */
+.wishlist-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  border: 1px solid #ddd;
+  padding: 15px;
+  margin-bottom: 15px;
+  border-radius: 10px;
+  background: #fff;
+
+  transition: 0.3s;
+}
+
+.wishlist-item:hover {
+  transform: scale(1.02);
+}
+
+/* Left section */
+.wishlist-left {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+.wishlist-left img {
+  width: 80px;
+  height: 80px;
+  object-fit: cover;
+  border-radius: 10px;
+}
+
+/* Cake name */
+.wishlist-left h3 {
+  margin: 0;
+}
+
+/* Remove button */
+.wishlist-item button {
+  background: #ec4899;
+  color: white;
+  border: none;
+  padding: 8px 12px;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.wishlist-item button:hover {
+  background: #be185d;
+}
