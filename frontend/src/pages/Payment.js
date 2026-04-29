@@ -1,6 +1,8 @@
 import React from "react";
+import { useNavigate } from "react-router-dom";
 
-const Payment = ({ cart }) => {
+const Payment = ({ cart, setCart }) => {
+  const navigate = useNavigate();
 
   const total = cart.reduce((sum, item) => {
     return sum + parseInt(item.price.replace("₹", ""));
@@ -8,7 +10,29 @@ const Payment = ({ cart }) => {
 
   const handlePayment = async () => {
     try {
-      // 👉 Create order from backend
+      console.log("🚀 Payment started");
+
+      // ✅ Check cart
+      if (total <= 0) {
+        alert("Cart is empty ❌");
+        return;
+      }
+
+      // ✅ Check login
+      const userEmail = localStorage.getItem("userEmail");
+      if (!userEmail) {
+        alert("Please login first ⚠️");
+        navigate("/login");
+        return;
+      }
+
+      // ✅ Check Razorpay loaded
+      if (!window.Razorpay) {
+        alert("Razorpay not loaded ❌");
+        return;
+      }
+
+      // ✅ Create order from backend
       const res = await fetch("http://localhost:5000/create-order", {
         method: "POST",
         headers: {
@@ -17,10 +41,15 @@ const Payment = ({ cart }) => {
         body: JSON.stringify({ amount: total }),
       });
 
+      if (!res.ok) {
+        throw new Error("Backend not responding");
+      }
+
       const data = await res.json();
+      console.log("✅ Order created:", data);
 
       const options = {
-        key: "rzp_test_xxxxx", // 🔥 YOUR KEY ID
+        key: "rzp_test_Sc97xDVVumDXnF",
         amount: data.amount,
         currency: "INR",
         name: "CakeShop",
@@ -28,25 +57,45 @@ const Payment = ({ cart }) => {
         order_id: data.id,
 
         handler: async function (response) {
-          alert("Payment Successful 🎉");
+          try {
+            console.log("💰 Payment success:", response);
 
-          // 👉 Save order to backend
-          await fetch("http://localhost:5000/save-order", {
-            method: "POST",
-            headers: {
-              "Content-Type": "application/json",
-            },
-            body: JSON.stringify({
-              paymentId: response.razorpay_payment_id,
-              orderId: response.razorpay_order_id,
-              cart: cart,
-            }),
-          });
+            // ✅ Save order
+            await fetch("http://localhost:5000/save-order", {
+              method: "POST",
+              headers: {
+                "Content-Type": "application/json",
+              },
+              body: JSON.stringify({
+                paymentId: response.razorpay_payment_id,
+                orderId: response.razorpay_order_id,
+                cart: cart,
+                userEmail: userEmail,
+              }),
+            });
+
+            // ✅ Clear cart
+            setCart([]);
+            localStorage.removeItem("cart");
+
+            alert("Payment Successful 🎉");
+            navigate("/success");
+
+          } catch (err) {
+            console.error("❌ Save order error:", err);
+            alert("Order saving failed ❌");
+          }
+        },
+
+        modal: {
+          ondismiss: function () {
+            alert("Payment cancelled ❌");
+          },
         },
 
         prefill: {
           name: "Customer",
-          email: "test@example.com",
+          email: userEmail,
           contact: "9999999999",
         },
 
@@ -59,13 +108,13 @@ const Payment = ({ cart }) => {
       razor.open();
 
     } catch (error) {
-      console.error(error);
+      console.error("🔥 PAYMENT ERROR:", error);
       alert("Payment failed ❌");
     }
   };
 
   return (
-    <div style={{ padding: "20px" }}>
+    <div style={{ padding: "20px", textAlign: "center" }}>
       <h2>Total Amount: ₹{total}</h2>
 
       <button onClick={handlePayment}>

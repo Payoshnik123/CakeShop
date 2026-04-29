@@ -1,48 +1,39 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import "./ProductDetails.css";
 
-import cake1 from "../assets/cake1.jpg";
-import cake2 from "../assets/cake2.jpg";
-import cake3 from "../assets/cake3.jpg";
-import cake4 from "../assets/cake4.jpg";
-import cake5 from "../assets/cake5.jpg";
-import cake6 from "../assets/cake6.jpg";
-
-const cakes = [
-  { name: "Chocolate Cake", price: "₹500", img: cake1 },
-  { name: "Red Velvet", price: "₹700", img: cake2 },
-  { name: "Truffle Cake", price: "₹1", img: cake3 },
-  { name: "Black Forest", price: "₹600", img: cake4 },
-  { name: "Strawberry Cake", price: "₹550", img: cake5 },
-  { name: "Vanilla Cake", price: "₹450", img: cake6 },
-];
-
-const ProductDetails = ({ cart, setCart }) => {
+const ProductDetails = () => {
   const { id } = useParams();
-  const cake = cakes[id];
+  const [cake, setCake] = useState(null);
 
-  const addToCart = () => {
-    setCart([...cart, cake]);
-  };
+  useEffect(() => {
+    const loadCake = async () => {
+      try {
+        const res = await fetch(`http://localhost:5000/product/${id}`);
+        const data = await res.json();
+        setCake(data);
+      } catch (err) {
+        console.log(err);
+      }
+    };
 
-  if (!cake) return <h2 style={{ padding: "20px" }}>Cake not found</h2>;
+    loadCake();
+  }, [id]);
+
+  if (!cake) {
+    return <h2 style={{ textAlign: "center" }}>Loading...</h2>;
+  }
 
   return (
-    <div className="details-container">
-      <img src={cake.img} alt={cake.name} />
+    <div style={{ textAlign: "center", padding: "20px" }}>
+      <img
+        src={`http://localhost:5000${cake.img}`}
+        alt={cake.name}
+        style={{ width: "300px", borderRadius: "10px" }}
+      />
 
-      <div className="details-info">
-        <h2>{cake.name}</h2>
-        <p>{cake.price}</p>
-
-        <p>
-          Delicious cake made with premium ingredients 🎂 Perfect for every
-          occasion!
-        </p>
-
-        <button onClick={addToCart}>Add to Cart</button>
-      </div>
+      <h2>{cake.name}</h2>
+      <h3>₹{cake.price}</h3>
+      <p>{cake.description}</p>
     </div>
   );
 };

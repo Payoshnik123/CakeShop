@@ -3,12 +3,18 @@ import { useState } from "react";
 
 import Navbar from "./components/Navbar";
 import CategoryList from "./components/CategoryList";
+import Admin from "./components/Admin";
 import CakeList from "./components/CakeList";
 import Cart from "./pages/Cart";
 import Wishlist from "./pages/WishList";
 import Footer from "./components/Footer";
 import ProductDetails from "./pages/ProductDetails";
 import Payment from "./pages/Payment";
+import OrderHistory from "./pages/OrderHistory";
+import Login from "./pages/Login";
+import OrderSuccess from "./pages/OrderSuccess";
+import OrderDetails from "./pages/OrderDetails";
+import Success from "./pages/Success";
 
 function App() {
   const [cart, setCart] = useState([]);
@@ -46,30 +52,43 @@ function App() {
             </>
           }
         />
+        {/*Order history */}
+        <Route path="/orders" element={<OrderHistory />} />
 
         {/* Cart */}
-        <Route
-          path="/cart"
-          element={<Cart cart={cart} setCart={setCart} />}
-        />
+        <Route path="/cart" element={<Cart cart={cart} setCart={setCart} />} />
 
-        {/*payment */}
+        {/* Login */}
+        <Route path="/login" element={<Login />} />
+
+        {/*Payment */}
+        <Route path="/payment" element={<Payment cart={cart} />} />
+
+        {/*Product Details */}
         <Route
-          path="/payment"
-          element={<Payment cart={cart} />}
+          path="/cake/:id"
+          element={<ProductDetails cart={cart} setCart={setCart} />}
         />
-        {/*ProductDetails */}
-        <Route
-            path="/cake/:id"
-            element={<ProductDetails cart={cart} setCart={setCart} />}
-          />
         {/* Wishlist */}
         <Route
           path="/wishlist"
-          element={
-            <Wishlist wishlist={wishlist} setWishlist={setWishlist} />
-          }
+          element={<Wishlist wishlist={wishlist} setWishlist={setWishlist} />}
         />
+
+        {/*Order Success */}
+        
+        <Route path="/success" element={<OrderSuccess />} />
+
+        {/*Admin */}
+
+        <Route path="/admin" element={<Admin />} />       
+
+        {/*Success */}        
+        <Route path="/success" element={<Success />} />
+
+        {/*Order Details */}
+
+        <Route path="/order/:id" element={<OrderDetails />} />    
       </Routes>
 
       <Footer />

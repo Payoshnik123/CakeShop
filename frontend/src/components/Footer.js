@@ -4,13 +4,14 @@ import "./Footer.css";
 const Footer = () => {
   return (
     <footer className="footer">
+      <hr></hr>
 
       {/* Top Section */}
       <div className="footer-top">
 
         {/* Brand */}
         <div className="footer-section">
-          <h2>🎂 CakeShop</h2>
+          <h2>🎂 CakeKing</h2>
           <p>Delivering happiness with every cake ❤️</p>
         </div>
 
@@ -35,7 +36,7 @@ const Footer = () => {
         {/* Contact */}
         <div className="footer-section">
           <h3>Contact Us</h3>
-          <p>Email: support@cakeshop.com</p>
+          <p>Email: support@cakeking.com</p>
           <p>Phone: +91 9922992021</p>
           <p>Umarkhed,Yavatmal,India</p>
         </div>

@@ -10,7 +10,7 @@ import cake6 from "../assets/cake6.jpg";
 
 // ✅ Category Data
 const categories = [
-  { name: "All", img: cake1 }, // Important for reset
+  { name: "All", img: cake1 }, 
   { name: "Chocolate", img: cake1 },
   { name: "Red Velvet", img: cake2 },
   { name: "Truffle", img: cake3 },
