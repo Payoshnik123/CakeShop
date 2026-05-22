@@ -33,8 +33,41 @@ const CakeList = ({
 
   // ✅ Add to cart
   const addToCart = (cake) => {
-    setCart([...cart, cake]);
-  };
+  const existing = cart.find(
+    (item) => item._id === cake._id
+  );
+
+  if (existing) {
+    const updatedCart = cart.map((item) =>
+      item._id === cake._id
+        ? {
+            ...item,
+            quantity: item.quantity + 1,
+          }
+        : item
+    );
+
+    setCart(updatedCart);
+
+    localStorage.setItem(
+      "cart",
+      JSON.stringify(updatedCart)
+    );
+
+  } else {
+    const updatedCart = [
+      ...cart,
+      { ...cake, quantity: 1 },
+    ];
+
+    setCart(updatedCart);
+
+    localStorage.setItem(
+      "cart",
+      JSON.stringify(updatedCart)
+    );
+  }
+};
 
   // ✅ Wishlist toggle
   const toggleWishlist = (cake) => {
@@ -71,7 +104,7 @@ const CakeList = ({
         >
           {/* ❤️ Wishlist */}
           <span
-            className="heart"
+            className="heart p-2"
             onClick={(e) => {
               e.stopPropagation();
               toggleWishlist(cake);
@@ -83,7 +116,8 @@ const CakeList = ({
           </span>
 
           {/* ✅ Image */}
-          <img
+          <img 
+            className="p-10"
             src={`http://localhost:5000${cake.img}`}
             alt={cake.name}
           />
@@ -98,6 +132,15 @@ const CakeList = ({
             }}
           >
             Add to Cart
+          </button>
+          <br></br>
+          <button
+            onClick={(e) => {
+              e.stopPropagation();
+              navigate("/payment", { state: { item: cake } });
+            }}
+          >
+            Buy Now ⚡
           </button>
         </div>
       ))}

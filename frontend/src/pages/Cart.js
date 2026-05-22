@@ -3,8 +3,7 @@ import { useNavigate } from "react-router-dom";
 import "./Cart.css";
 
 const Cart = ({ cart, setCart }) => {
-  const navigate = useNavigate(); // ✅ navigation fix
-
+  const navigate = useNavigate();
   // Remove item
   const removeItem = (index) => {
     const updatedCart = cart.filter((_, i) => i !== index);

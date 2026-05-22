@@ -1,57 +1,103 @@
 .cake-container {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: 25px;
-  padding: 20px;
+  gap: 30px;
+  padding: 30px;
 }
 
-/* ✅ Make all cards equal */
+/* CARD */
 .cake-card {
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-
-  height: 550px; /* fixed height */
-  border: 1px solid #ddd;
-  border-radius: 10px;
-  padding: 15px;
   background: white;
+  border-radius: 20px;
+  padding: 20px;
   text-align: center;
-
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
   transition: 0.3s;
-}
-
-.cake-card:hover {
-  transform: scale(1.05);
-}
-
-/* ✅ Fix image size */
-.cake-card img {
-  width: 100%;
-  height: 380px;       /* same height for all */
-  object-fit: cover;   /* prevents stretching */
-  border-radius: 10px;
-}
-
-/* ✅ Push button to bottom */
-.cake-card button {
-  margin-top: auto;
-  padding: 8px 12px;
-  background: #ec4899;
-  color: white;
-  border: none;
-  cursor: pointer;
-  border-radius: 5px;
-}
-
-.cake-card {
   position: relative;
 }
 
+.cake-card:hover {
+  transform: translateY(-5px);
+}
+
+/* IMAGE */
+.cake-card img {
+  width: 100%;
+  height: 500px;
+  object-fit: cover;
+  border-radius: 15px;
+}
+
+/* TITLE */
+.cake-card h3 {
+  margin-top: 15px;
+  font-size: 22px;
+}
+
+/* PRICE */
+.cake-card p {
+  color: #ec4899;
+  font-size: 20px;
+  font-weight: bold;
+  margin-top: 8px;
+}
+
+/* BUTTONS */
+.cake-card button {
+  width: 100%;
+  padding: 12px;
+  margin-top: 12px;
+  border: none;
+  border-radius: 10px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+/* ADD TO CART */
+.cake-card button:first-of-type {
+  background: #ec4899;
+  color: white;
+}
+
+.cake-card button:first-of-type:hover {
+  background: #db2777;
+}
+
+/* BUY NOW */
+.cake-card button:last-of-type {
+  background: #111827;
+  color: white;
+}
+
+.cake-card button:last-of-type:hover {
+  background: #374151;
+}
+
+/* HEART */
 .heart {
   position: absolute;
-  top: 10px;
-  right: 10px;
-  font-size: 20px;
+  top: 15px;
+  right: 15px;
+  font-size: 26px;
   cursor: pointer;
+  z-index: 5;
+}
+
+/* TABLET */
+@media (max-width: 992px) {
+  .cake-container {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+/* MOBILE */
+@media (max-width: 600px) {
+  .cake-container {
+    grid-template-columns: 1fr;
+  }
+
+  .cake-card img {
+    height: 250px;
+  }
 }

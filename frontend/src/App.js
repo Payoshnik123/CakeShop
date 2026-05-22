@@ -15,6 +15,10 @@ import Login from "./pages/Login";
 import OrderSuccess from "./pages/OrderSuccess";
 import OrderDetails from "./pages/OrderDetails";
 import Success from "./pages/Success";
+import AdminDashboard from "./pages/AdminDashboard";
+import AdminLogin from "./pages/AdminLogin";
+import ProtectedRoute from "./pages/ProtectedRoute";
+
 
 function App() {
   const [cart, setCart] = useState([]);
@@ -89,6 +93,21 @@ function App() {
         {/*Order Details */}
 
         <Route path="/order/:id" element={<OrderDetails />} />    
+
+        {/*Admin Login */}
+
+        <Route path="/admin-login" element={<AdminLogin />} />
+
+        {/*Admin Dashboard */}
+
+        <Route
+          path="/admin-dashboard"
+          element={
+            <ProtectedRoute>
+              <AdminDashboard />
+            </ProtectedRoute>
+          }
+        />
       </Routes>
 
       <Footer />

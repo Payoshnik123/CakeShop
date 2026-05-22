@@ -1,4 +1,5 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, } from "react";
+import { useNavigate } from "react-router-dom";
 
 const Admin = () => {
   const [product, setProduct] = useState({
@@ -7,7 +8,7 @@ const Admin = () => {
     description: "",
     image: null,
   });
-
+  const navigate = useNavigate();
   const [products, setProducts] = useState([]);
 
   // load products
@@ -33,9 +34,8 @@ const Admin = () => {
   formData.append("name", product.name);
   formData.append("price", product.price);
   formData.append("description", product.description);
-  formData.append("category", product.category); // ✅ IMPORTANT
-  formData.append("image", product.image);       // ✅ FILE
-
+  formData.append("category", product.category); 
+  formData.append("image", product.image);
   try {
     await fetch("http://localhost:5000/add-product", {
       method: "POST",
@@ -128,6 +128,9 @@ const Admin = () => {
           Add Cake
         </button>
       </div>
+      <button onClick={() => navigate("/admin-dashboard")}>
+        View Dashboard 📊
+      </button>
 
       <hr />
 

@@ -1,14 +1,15 @@
 import React from "react";
 import "./Navbar.css";
 import { useNavigate } from "react-router-dom";
+import Logo2 from "../assets/Logo2.png";
 
 const Navbar = ({ cartCount, wishlistCount, setSearch }) => {
   const navigate = useNavigate();
 
-  // ✅ Get logged-in user
+  // ✅ Logged in user
   const userEmail = localStorage.getItem("userEmail");
 
-  // ✅ Logout function
+  // ✅ Logout
   const handleLogout = () => {
     localStorage.removeItem("userEmail");
     alert("Logged out successfully");
@@ -18,21 +19,37 @@ const Navbar = ({ cartCount, wishlistCount, setSearch }) => {
   return (
     <nav className="navbar">
 
-      {/* 🔥 Logo */}
-      <div className="logo" onClick={() => navigate("/")}>
-        🎂 CakeKing
-      </div>
+      {/* 🎂 LOGO SECTION */}
+      <div
+        className="logo-section"
+        onClick={() => navigate("/")}
+      >
+        
 
-      {/* 🔍 Search */}
-      <div className="search">
-        <input
-          type="text"
-          placeholder="Search cakes..."
-          onChange={(e) => setSearch(e.target.value)}
+        <img
+          src={Logo2}
+          alt="CakeKing"
+          className="brand-logo"
         />
       </div>
 
-      {/* 📌 Menu */}
+      {/* 🔍 SEARCH BAR */}
+      <div className="search-container">
+
+        <input
+          type="text"
+          placeholder="Search delicious cakes..."
+          className="search-input"
+          onChange={(e) => setSearch(e.target.value)}
+        />
+
+        <button className="search-btn">
+          🔍 Search
+        </button>
+
+      </div>
+
+      {/* 📌 MENU */}
       <div className="menu">
 
         <span onClick={() => navigate("/")}>
@@ -44,25 +61,28 @@ const Navbar = ({ cartCount, wishlistCount, setSearch }) => {
         </span>
 
         <span onClick={() => navigate("/wishlist")}>
-          ❤️ Shortlist ({wishlistCount})
+          ❤️ Wishlist ({wishlistCount})
         </span>
 
         <span onClick={() => navigate("/orders")}>
           📦 Orders
         </span>
 
-        <span onClick={()=> navigate("/admin")}>
+        <span onClick={() => navigate("/admin")}>
           🛠️ Admin
         </span>
 
-        {/* 👤 User Section */}
+        {/* 👤 USER */}
         {userEmail ? (
           <>
             <span className="user">
               👤 {userEmail.split("@")[0]}
             </span>
 
-            <button className="logout-btn" onClick={handleLogout}>
+            <button
+              className="logout-btn"
+              onClick={handleLogout}
+            >
               Logout
             </button>
           </>
